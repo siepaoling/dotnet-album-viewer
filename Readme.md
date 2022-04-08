@@ -64,8 +64,13 @@ The **Docker** setup demonstrates:
 Versions supported:
 * **Windows 10 or Windows Server 2016**
 * **Docker 17.06 (CE or EE)**
+* **OS/Arch: windows/amd64**
 
 ### Getting Started - using Docker on Windows ###
+
+The docker images used in this sample were built for windows/amd64. If you are using Windows 10, set your docker desktop to run under *Windows containers*, it does not work with *WSL (Linux) containers*
+
+You can right click on Docker Desktop > Switch to Windows Containers..
 
 You don't need .NET Core installed to run the app in Docker. Just clone the repo and run:
 
