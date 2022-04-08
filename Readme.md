@@ -76,10 +76,32 @@ You don't need .NET Core installed to run the app in Docker. Just clone the repo
 
 ```
 docker-compose build
+```
+
+That compiles the app and package it into a Docker container image.
+
+In some Docker Desktop installations, build could fail due to the following error:
+
+```
+Step 7/13 : RUN dotnet restore src/AlbumViewerNetCore/AlbumViewerNetCore.csproj
+ ---> Running in 9f65795f2530
+C:\Program Files\dotnet\sdk\2.1.818\NuGet.targets(123,5): error : Unable to load the service index for source https://api.nuget.org/v3/index.json. [C:\album-viewer\src\AlbumViewerNetCore\AlbumViewerNetCore.csproj]
+C:\Program Files\dotnet\sdk\2.1.818\NuGet.targets(123,5): error :   No such host is known [C:\album-viewer\src\AlbumViewerNetCore\AlbumViewerNetCore.csproj]
+The command 'cmd /S /C dotnet restore src/AlbumViewerNetCore/AlbumViewerNetCore.csproj' returned a non-zero code: 1
+ERROR: Service 'app' failed to build : Build failed
+```
+
+In order to fix this goto your Docker -> Settings -> Docker Engine and then add a json in existing json as `"dns" : ["1.1.1.1"]` and restart your docker.
+
+When the build is successful, it will generate docker image.
+
+Launch docker-compose as below:
+
+```
 docker-compose up -d
 ```
 
-That compiles the app using a Docker container, and then runs the app in distributed mode with one container for the ASP.NET Core app, and one container for SQL Server.
+This runs the app in distributed mode with one container for the ASP.NET Core app, and one container for SQL Server.
 
 To run in a single container using SQLite instead of SQL Server, just run:
 
